@@ -31,4 +31,31 @@ res.send({message : "Pizza not available"})
 }
 
 
-module.exports = {createPizza,getAllPizza,getAPizza}
+
+const editPizza = async(req,res)=>{
+    const pizzaID= req.params.id;
+    const {pizzaName,category,ingredients,price,size} = req.body;
+
+await Pizza.findByIdAndUpdate(pizzaID,{
+    pizzaName:pizzaName,
+    category:category,
+    ingredients:ingredients,
+    price:price,
+    size:size
+})
+
+const updatedPizza = await Pizza.findById(pizzaID)
+res.json({Pizza : updatedPizza})
+
+
+}
+
+
+const deletePizza= async(req,res) =>{
+const pizzaID = req.params.id
+await Pizza.findByIdAndDelete(pizzaID)
+const pizza = await Pizza.find();
+res.json({Pizza:pizza})
+}
+
+module.exports = {createPizza,getAllPizza,getAPizza,editPizza,deletePizza}

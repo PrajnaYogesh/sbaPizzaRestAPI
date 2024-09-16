@@ -7,14 +7,15 @@ connectToDB();
 app.use(express.json());
 const custRoute = require('./routes/custRoute')
 const pizzaRoute = require('./routes/pizzaRoute')
-// const orderRoute = require('./routes/orderRoute')
-// const pizzaRoute = require('./routes/pizzaRoute')
+const orderRoute = require('./routes/orderRoute')
+
 
 
 
 
 app.use('/api',custRoute);
 app.use('/api/pizza',pizzaRoute)
+app.use('api/order',orderRoute)
 
 app.listen(PORT,()=>{
     console.log("Listening to port");
